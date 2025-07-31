@@ -100,6 +100,38 @@ try:
     # temp_2.columns = []
     st.dataframe(temp_2)
 
+    # st.write("### Monthly Sales Trend")
+
+    temp_3 = df.groupby("Month_name")["money"].sum().\
+        reset_index().sort_values(by ="money", ascending=False)
+
+     st.dataframe(temp_3)
+
+    chart_2 = alt.Chart(temp_2).mark_bar().encode(
+        x=alt.X("Coffee_name:N"),
+        y=alt.Y("money:Q"),
+        color=alt.Color("Coffee_name:N", legend=None)
+
+    ).properties(height = 250)
+    # display the chart
+    st.altair_chart(chart_2)
+
+    # st.subheader("### Average Revenue per Coffee Sold")
+
+    # temp_5 = df.groupby("coffee_name")["money"].mean().\
+    #     reset_index().sort_values(by ="money", ascending=False)
+    # t.dataframe(temp_5)
+
+    # chart_5 = alt.Chart(temp_5).mark_line().encode(
+    #     x=alt.X("Coffee_name"),
+    #     y=alt.Y("money"),
+    #     # color=alt.Color("Coffee_name:N", legend=None)
+
+    # ).properties(height = 250)
+
+    #  st.altair_chart(chart_5)
+
+
 except Exception as e: 
     st.error("Error: check error details")
 
